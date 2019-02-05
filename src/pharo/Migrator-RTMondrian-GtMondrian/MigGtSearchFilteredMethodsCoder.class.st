@@ -20,9 +20,9 @@ MigGtSearchFilteredMethodsCoder >> scoreOf: aCoder [
 		ifNotNil: [ | matches |
 			matches := (search
 				migMatchesIn: (aCoder classOrMetaClass >> aCoder selector) ast) reject: #isEmpty.
-			(matches isEmpty)
+			matches
 				ifEmpty: [ 9999 ]
-				ifNotEmpty: [ (matches collect: [ :e | e collect: #start ]) migMin ] ]
+				ifNotEmpty: [ (matches collect: [ :e | e collect: #first ]) migMin ] ]
 ]
 
 { #category : #accessing }

@@ -4,7 +4,7 @@ Extension { #name : #SequenceableCollection }
 SequenceableCollection >> migMin [
 	self assert: [ self allSatisfy: #isCollection ].
 	^ self size = 1
-		ifTrue: [ self min ]
+		ifTrue: [ self first min ]
 		ifFalse: [ | first rest |
 			rest := self.
 			first := rest first.
