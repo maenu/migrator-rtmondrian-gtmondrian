@@ -4,37 +4,36 @@ Class {
 	#category : #'Migrator-RTMondrian-GtMondrian'
 }
 
+{ #category : #private }
+MigGtSearchFilteredMethodsCoder >> filters [
+	^ {self implementorsFilter.
+	self categoryFilter}
+]
+
 { #category : #'initialize-release' }
 MigGtSearchFilteredMethodsCoder >> forMethods: compiledMethods [
 	super forMethods: compiledMethods.
+	originalFilter := compiledMethods filter.
+	implementorsFilterString := compiledMethods filter search.
 	self updateCoders
 ]
 
 { #category : #private }
 MigGtSearchFilteredMethodsCoder >> implementorsFilter [
-	^ (implementorsFilterString notNil
-		and: [ implementorsFilterString notEmpty ])
-		ifTrue: [ MigGtMethodsFilter new
-				search: implementorsFilterString;
-				yourself ]
+	^ originalFilter
+		search: implementorsFilterString;
+		yourself
 ]
 
 { #category : #'as yet unclassified' }
 MigGtSearchFilteredMethodsCoder >> scoreOf: aCoder [
-	^ implementorsFilterString
-		ifNil: [ 9999 ]
-		ifNotNil: [ | matches |
-			matches := (implementorsFilterString
-				migMatchesIn: (aCoder classOrMetaClass >> aCoder selector) ast)
-				reject: #isEmpty.
-			matches
-				ifEmpty: [ 9999 ]
-				ifNotEmpty: [ (matches collect: [ :e | e collect: #first ]) migMin ] ]
+	^ (implementorsFilterString
+		migMatchesIn: (aCoder classOrMetaClass >> aCoder selector) ast) size
 ]
 
 { #category : #private }
 MigGtSearchFilteredMethodsCoder >> shouldSort: a before: b [
-	^ (self scoreOf: a) <= (self scoreOf: b)
+	^ (self scoreOf: a) >= (self scoreOf: b)
 ]
 
 { #category : #private }

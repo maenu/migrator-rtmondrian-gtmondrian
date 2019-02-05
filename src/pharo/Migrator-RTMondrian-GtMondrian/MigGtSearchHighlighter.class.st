@@ -19,8 +19,8 @@ MigGtSearchHighlighter >> search: anObject [
 
 { #category : #visiting }
 MigGtSearchHighlighter >> visitNode: aNode [
-	search
-		ifNotNil: [ ((search migMatchesIn: aNode) flatCollect: #yourself)
+	search trimBoth isEmptyOrNil
+		ifFalse: [ ((search migMatchesIn: aNode) collect: #value)
 				do: [ :e | 
 					((e first between: 1 and: text size)
 						and: [ e last between: 1 and: text size ])
