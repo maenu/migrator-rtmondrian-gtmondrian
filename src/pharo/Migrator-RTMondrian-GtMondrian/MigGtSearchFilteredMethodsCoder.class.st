@@ -27,8 +27,8 @@ MigGtSearchFilteredMethodsCoder >> implementorsFilter [
 
 { #category : #'as yet unclassified' }
 MigGtSearchFilteredMethodsCoder >> scoreOf: aCoder [
-	^ (implementorsFilterString
-		migMatchesIn: (aCoder classOrMetaClass >> aCoder selector) ast) size
+	^ (implementorsFilterString migWords
+		migMatchingRangesIn: (aCoder classOrMetaClass >> aCoder selector) ast) size
 ]
 
 { #category : #private }

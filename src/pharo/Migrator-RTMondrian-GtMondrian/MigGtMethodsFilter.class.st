@@ -49,8 +49,7 @@ MigGtMethodsFilter >> includeMethod: aCompiledMethod [
 				anySatisfy: [ :e | 
 					e methodClass = aCompiledMethod methodClass
 						and: [ e selector = aCompiledMethod selector ] ] ])
-		and: [ search trimBoth isEmptyOrNil
-				or: [ (search migMatchesIn: aCompiledMethod ast) isNotEmpty ] ]
+		and: [ search migWords migMatches: aCompiledMethod ast ]
 ]
 
 { #category : #accessing }
