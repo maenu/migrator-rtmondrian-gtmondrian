@@ -31,7 +31,10 @@ MigGtMethodsFilter class >> fromRTMondrian [
 { #category : #converting }
 MigGtMethodsFilter >> asCollection [
 	^ MigGtSearchMethodsCollection new
-		filter: self;
+		filter:
+			(self copy
+				search: nil;
+				yourself);
 		search: search;
 		yourself
 ]
@@ -45,10 +48,11 @@ MigGtMethodsFilter >> highlighter [
 
 { #category : #testing }
 MigGtMethodsFilter >> includeMethod: aCompiledMethod [
-	^ (self methods
-		anySatisfy: [ :e | 
-			e methodClass = aCompiledMethod methodClass
-				and: [ e selector = aCompiledMethod selector ] ])
+	^ (methods isNil
+		or: [ methods
+				anySatisfy: [ :e | 
+					e methodClass = aCompiledMethod methodClass
+						and: [ e selector = aCompiledMethod selector ] ] ])
 		and: [ search isNil
 				or: [ (search migMatchesIn: aCompiledMethod ast) anySatisfy: #isNotEmpty ] ]
 ]

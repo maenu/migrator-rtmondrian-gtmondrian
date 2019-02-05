@@ -10,8 +10,8 @@ Class {
 { #category : #converting }
 MigGtSearchMethodsCollection >> asCoder [
 	^ MigGtSearchFilteredMethodsCoder new
-		search: search;
 		forMethods: self;
+		implementorsFilterString: search;
 		yourself
 ]
 

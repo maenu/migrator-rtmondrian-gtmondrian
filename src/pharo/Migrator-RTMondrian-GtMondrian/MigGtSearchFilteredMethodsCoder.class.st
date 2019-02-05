@@ -1,9 +1,6 @@
 Class {
 	#name : #MigGtSearchFilteredMethodsCoder,
 	#superclass : #GtFilteredMethodsCoder,
-	#instVars : [
-		'search'
-	],
 	#category : #'Migrator-RTMondrian-GtMondrian'
 }
 
@@ -13,26 +10,26 @@ MigGtSearchFilteredMethodsCoder >> forMethods: compiledMethods [
 	self updateCoders
 ]
 
+{ #category : #private }
+MigGtSearchFilteredMethodsCoder >> implementorsFilter [
+	^ (implementorsFilterString notNil
+		and: [ implementorsFilterString notEmpty ])
+		ifTrue: [ MigGtMethodsFilter new
+				search: implementorsFilterString;
+				yourself ]
+]
+
 { #category : #'as yet unclassified' }
 MigGtSearchFilteredMethodsCoder >> scoreOf: aCoder [
-	^ search
+	^ implementorsFilterString
 		ifNil: [ 9999 ]
 		ifNotNil: [ | matches |
-			matches := (search
-				migMatchesIn: (aCoder classOrMetaClass >> aCoder selector) ast) reject: #isEmpty.
+			matches := (implementorsFilterString
+				migMatchesIn: (aCoder classOrMetaClass >> aCoder selector) ast)
+				reject: #isEmpty.
 			matches
 				ifEmpty: [ 9999 ]
 				ifNotEmpty: [ (matches collect: [ :e | e collect: #first ]) migMin ] ]
-]
-
-{ #category : #accessing }
-MigGtSearchFilteredMethodsCoder >> search [
-	^ search
-]
-
-{ #category : #accessing }
-MigGtSearchFilteredMethodsCoder >> search: anObject [
-	search := anObject
 ]
 
 { #category : #private }
