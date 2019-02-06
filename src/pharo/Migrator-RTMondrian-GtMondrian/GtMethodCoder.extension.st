@@ -20,6 +20,7 @@ GtMethodCoder >> migGtBrowseMigratedMethod: anElement [
 GtMethodCoder >> migGtInitializeMethodAddOnsFor: anAst [
 	<gtAstCoderAddOns: 13>
 	addOns
+		addStyler: MigGtPatternBodyStyler new;
 		addShortcut:
 			(BlShortcut new
 				combination:
@@ -28,4 +29,9 @@ GtMethodCoder >> migGtInitializeMethodAddOnsFor: anAst [
 						key: Key k;
 						build);
 				action: [ :e | self migGtBrowseMigratedMethod: e ])
+]
+
+{ #category : #'*Migrator-RTMondrian-GtMondrian' }
+GtMethodCoder >> migGtPatternBodyStyler [
+	^ addOns stylers detect: [ :e | e class = MigGtPatternBodyStyler ]
 ]
