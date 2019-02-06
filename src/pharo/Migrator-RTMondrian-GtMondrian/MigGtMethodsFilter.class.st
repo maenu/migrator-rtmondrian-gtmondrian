@@ -19,6 +19,13 @@ MigGtMethodsFilter class >> fromGtMondrian [
 ]
 
 { #category : #'instance creation' }
+MigGtMethodsFilter class >> fromGtRTMondrian [
+	^ self new
+		methods: MigGtRTMondrianExample methods;
+		yourself
+]
+
+{ #category : #'instance creation' }
 MigGtMethodsFilter class >> fromRTMondrian [
 	^ self new
 		methods:
@@ -26,6 +33,12 @@ MigGtMethodsFilter class >> fromRTMondrian [
 				select: [ :e | (e beginsWith: 'example') and: [ (e endsWith: 'Icon') not ] ])
 				collect: [ :e | RTMondrianExample >> e ]);
 		yourself
+]
+
+{ #category : #'as yet unclassified' }
+MigGtMethodsFilter class >> inspectRTMondrian [
+	<script>
+	GtInspector openOn: self fromRTMondrian
 ]
 
 { #category : #converting }
