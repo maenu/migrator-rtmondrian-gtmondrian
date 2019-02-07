@@ -1,9 +1,6 @@
 Class {
 	#name : #MigGtSearchFilteredMethodsCoder,
 	#superclass : #GtFilteredMethodsCoder,
-	#instVars : [
-		'pattern'
-	],
 	#category : #'Migrator-RTMondrian-GtMondrian'
 }
 
@@ -30,23 +27,12 @@ MigGtSearchFilteredMethodsCoder >> implementorsFilter [
 
 { #category : #elements }
 MigGtSearchFilteredMethodsCoder >> look [
-	^ MigGtPatternMethodsCoderLook new methodsCoder: self
+	^ MigGtRuleMethodsCoderLook new methodsCoder: self
 ]
 
 { #category : #accessing }
-MigGtSearchFilteredMethodsCoder >> pattern [
-	^ pattern
-]
-
-{ #category : #accessing }
-MigGtSearchFilteredMethodsCoder >> pattern: anObject [
-	pattern := anObject.
-	methodCoders
-		do: [ :e | 
-			[ e migGtPatternBodyStyler pattern: anObject.
-			e styleText ]
-				on: NotFound
-				do: [ "noop" ] ]
+MigGtSearchFilteredMethodsCoder >> methodCoders [
+	^ methodCoders
 ]
 
 { #category : #'as yet unclassified' }

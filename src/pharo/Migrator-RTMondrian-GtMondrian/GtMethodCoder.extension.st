@@ -20,7 +20,7 @@ GtMethodCoder >> migGtBrowseMigratedMethod: anElement [
 GtMethodCoder >> migGtInitializeMethodAddOnsFor: anAst [
 	<gtAstCoderAddOns: 13>
 	addOns
-		addStyler: MigGtPatternBodyStyler new;
+		addStyler: MigGtSearchBodyStyler new;
 		addShortcut:
 			(BlShortcut new
 				combination:
@@ -32,13 +32,14 @@ GtMethodCoder >> migGtInitializeMethodAddOnsFor: anAst [
 ]
 
 { #category : #'*Migrator-RTMondrian-GtMondrian' }
-GtMethodCoder >> migGtPatternBodyStyler [
-	^ addOns stylers detect: [ :e | e class = MigGtPatternBodyStyler ]
+GtMethodCoder >> migGtSearchBodyStyler [
+	^ addOns stylers
+		detect: [ :e | e class = MigGtSearchBodyStyler ]
+		ifNone: [ nil ]
 ]
 
 { #category : #'*Migrator-RTMondrian-GtMondrian' }
 GtMethodCoder >> migMethodSource: aString [
-Halt once. 
 	methodSource := aString.
 	astCache := nil -> nil.
 	self buildSource
