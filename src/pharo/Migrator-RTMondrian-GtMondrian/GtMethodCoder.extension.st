@@ -35,3 +35,11 @@ GtMethodCoder >> migGtInitializeMethodAddOnsFor: anAst [
 GtMethodCoder >> migGtPatternBodyStyler [
 	^ addOns stylers detect: [ :e | e class = MigGtPatternBodyStyler ]
 ]
+
+{ #category : #'*Migrator-RTMondrian-GtMondrian' }
+GtMethodCoder >> migMethodSource: aString [
+Halt once. 
+	methodSource := aString.
+	astCache := nil -> nil.
+	self buildSource
+]

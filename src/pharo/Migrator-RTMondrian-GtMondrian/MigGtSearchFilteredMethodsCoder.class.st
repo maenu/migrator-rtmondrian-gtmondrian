@@ -30,7 +30,7 @@ MigGtSearchFilteredMethodsCoder >> implementorsFilter [
 
 { #category : #elements }
 MigGtSearchFilteredMethodsCoder >> look [
-	^ MigGtImplementorsFilterMethodsCoderLook new methodsCoder: self
+	^ MigGtPatternMethodsCoderLook new methodsCoder: self
 ]
 
 { #category : #accessing }
