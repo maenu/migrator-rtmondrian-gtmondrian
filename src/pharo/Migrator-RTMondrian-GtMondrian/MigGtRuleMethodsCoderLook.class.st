@@ -13,12 +13,10 @@ MigGtRuleMethodsCoderLook >> applyButtonWithSearch: aCoder replace: anotherCoder
 				do: [ :e | 
 					| ast |
 					ast := e rbAST.
-					ast
-						acceptVisitor:
-							(MigRBReplaceNodeVisitor new
-								search: aCoder evaluateAndHighlightAllSource;
-								replace: anotherCoder evaluateAndHighlightAllSource;
-								yourself).
+					(MigRBReplaceNodeVisitor new
+						search: aCoder evaluateAndHighlightAllSource;
+						replace: anotherCoder evaluateAndHighlightAllSource;
+						yourself) visitNode: ast.
 					e migMethodSource: ast formattedCode ] ];
 		yourself
 ]

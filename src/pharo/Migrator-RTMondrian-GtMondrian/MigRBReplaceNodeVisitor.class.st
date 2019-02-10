@@ -34,6 +34,7 @@ MigRBReplaceNodeVisitor >> visitNode: aNode [
 	node := aNode.
 	(search value: node)
 		ifTrue: [ node := replace value: node ].
-	aNode replaceWith: node.
+	node == aNode
+		ifFalse: [ aNode replaceWith: node ].
 	^ super visitNode: node
 ]
