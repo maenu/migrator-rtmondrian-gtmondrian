@@ -26,7 +26,7 @@ GtMethodCoder >> migGtInitializeMethodAddOnsFor: anAst [
 				combination:
 					(BlKeyCombination builder
 						primary;
-						key: Key k;
+						key: BlKeyboardKey k;
 						build);
 				action: [ :e | self migGtBrowseMigratedMethod: e ])
 ]

@@ -28,7 +28,7 @@ GtSourceCoder >> migGtInitializeSourceAddOnsFor: anAst [
 				combination:
 					(BlKeyCombination builder
 						primary;
-						key: Key l;
+						key: BlKeyboardKey l;
 						build);
 				action: [ :e | self migGtBrowseMatches: e ])
 ]
