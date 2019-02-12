@@ -23,18 +23,31 @@ MigGtRuleMethodsCoderLook >> applyButtonWithSearch: aCoder replace: anotherCoder
 
 { #category : #initialization }
 MigGtRuleMethodsCoderLook >> initializeLook [
-	| methodsList index search match replace apply |
+	| methodsList index search match replace apply save reset |
 	super initializeLook.
 	methodsList := self widget childNamed: #methodsList.
 	index := self widget childIndexOf: methodsList.
 	search := self searchCoder.
-	match := self matchButtonWithSearch: search.
 	replace := self replaceCoder.
+	match := self matchButtonWithSearch: search.
 	apply := self applyButtonWithSearch: search replace: replace.
+	save := self saveButton.
+	reset := self resetButton.
 	self widget
-		addChild: apply at: index;
+		addChild:
+			(BlElement new
+				layout: BlLinearLayout horizontal;
+				addChildren:
+					{match.
+					apply.
+					save.
+					reset};
+				constraintsDo: [ :c | 
+					c vertical fitContent.
+					c horizontal matchParent ];
+				yourself)
+			at: index;
 		addChild: replace asElement at: index;
-		addChild: match at: index;
 		addChild: search asElement at: index
 ]
 
@@ -62,6 +75,24 @@ MigGtRuleMethodsCoderLook >> replaceCoder [
 		source: '[ :e | e ]';
 		yourself.
 	^ coder
+]
+
+{ #category : #initialization }
+MigGtRuleMethodsCoderLook >> resetButton [
+	^ BrButton new
+		look: BrGlamorousButtonWithLabelLook;
+		label: 'Reset';
+		action: [ methodsCoder methodCoders do: #migReset ];
+		yourself
+]
+
+{ #category : #initialization }
+MigGtRuleMethodsCoderLook >> saveButton [
+	^ BrButton new
+		look: BrGlamorousButtonWithLabelLook;
+		label: 'Save';
+		action: [ methodsCoder methodCoders do: #save ];
+		yourself
 ]
 
 { #category : #initialization }

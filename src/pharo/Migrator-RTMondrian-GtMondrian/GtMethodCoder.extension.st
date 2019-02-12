@@ -44,3 +44,9 @@ GtMethodCoder >> migMethodSource: aString [
 	astCache := nil -> nil.
 	self buildSource
 ]
+
+{ #category : #'*Migrator-RTMondrian-GtMondrian' }
+GtMethodCoder >> migReset [
+	self
+		migMethodSource: (self classOrMetaClass >> self selector) sourceCode
+]

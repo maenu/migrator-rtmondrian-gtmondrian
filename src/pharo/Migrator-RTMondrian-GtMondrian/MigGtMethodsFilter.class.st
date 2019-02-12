@@ -36,6 +36,12 @@ MigGtMethodsFilter class >> fromRTMondrian [
 ]
 
 { #category : #'as yet unclassified' }
+MigGtMethodsFilter class >> inspectGtRTMondrian [
+	<script>
+	GtInspector openOn: self fromGtRTMondrian
+]
+
+{ #category : #'as yet unclassified' }
 MigGtMethodsFilter class >> inspectRTMondrian [
 	<script>
 	GtInspector openOn: self fromRTMondrian

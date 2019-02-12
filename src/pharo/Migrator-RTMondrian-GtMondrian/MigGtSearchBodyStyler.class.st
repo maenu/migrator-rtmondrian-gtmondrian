@@ -33,6 +33,7 @@ MigGtSearchBodyStyler >> styleFrom: from to: to with: attributes [
 { #category : #visiting }
 MigGtSearchBodyStyler >> visitNode: aNode [
 	| value |
+	aNode typIsTyped ifFalse: [ ^ self ].
 	value := block value: aNode.
 	value = true
 		ifTrue: [ self
