@@ -3,6 +3,7 @@ Class {
 	#superclass : #GtCoderMethodsFilter,
 	#instVars : [
 		'methods',
+		'migrations',
 		'search'
 	],
 	#category : #'Migrator-RTMondrian-GtMondrian'
@@ -22,6 +23,7 @@ MigGtMethodsFilter class >> fromGtMondrian [
 MigGtMethodsFilter class >> fromGtRTMondrian [
 	^ self new
 		methods: MigGtRTMondrianExample methods;
+		migrations: MigGtRTMondrianExample migrations;
 		yourself
 ]
 
@@ -71,6 +73,12 @@ MigGtMethodsFilter >> includeMethod: aCompiledMethod [
 		and: [ search migWords migMatches: aCompiledMethod ast ]
 ]
 
+{ #category : #initialization }
+MigGtMethodsFilter >> initialize [
+	super initialize.
+	migrations := {}
+]
+
 { #category : #accessing }
 MigGtMethodsFilter >> methods [
 	^ methods
@@ -79,6 +87,16 @@ MigGtMethodsFilter >> methods [
 { #category : #accessing }
 MigGtMethodsFilter >> methods: anObject [
 	methods := anObject
+]
+
+{ #category : #accessing }
+MigGtMethodsFilter >> migrations [
+	^ migrations
+]
+
+{ #category : #accessing }
+MigGtMethodsFilter >> migrations: anObject [
+	migrations := anObject
 ]
 
 { #category : #accessing }
